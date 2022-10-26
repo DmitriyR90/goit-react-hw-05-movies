@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
-export const Header = styled.header`
+export const HeaderStyled = styled.header`
   top: 0;
   left: 0;
   position: sticky;
-  z-index: 1100;
+
   padding: 16px 32px;
 
   color: black;
@@ -20,9 +20,7 @@ export const Header = styled.header`
 `;
 
 export const Link = styled(NavLink)`
-  /* padding: 8px 16px; */
-  /* border-radius: 4px; */
-  font-size: 18px;
+  font-size: 24px;
   text-decoration: none;
   color: black;
   font-weight: 700;

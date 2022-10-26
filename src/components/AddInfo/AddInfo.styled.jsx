@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-export const TrendsWrap = styled.div`
-  padding: 24px;
+export const AddWrap = styled.div`
+  border-bottom: 2px solid grey;
+  padding: 0 16px;
 `;
 
 export const StyledLink = styled(Link)`
