@@ -2,7 +2,7 @@ import { useState, useEffect, Suspense } from 'react';
 import { useLocation, useParams, Outlet } from 'react-router-dom';
 import { getMovieInfo } from '../../API';
 import { MovieInfoPath } from 'components/MovieInfoPath/MovieInfoPath';
-import { AddInfo } from '../AddInfo/AddInfo';
+import { AddInfo } from '../../components/AddInfo/AddInfo';
 import { MovieWrap, BackBtn } from './MoviesDetails.styled';
 
 const MoviesDetails = () => {

@@ -1,12 +1,13 @@
 import { getMovies } from 'API';
 import { useEffect, useState } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
-import { MovieWrap, Form, Input, Button, StyledLink } from './Movies.styled';
+import { useSearchParams } from 'react-router-dom';
+import { MovieWrap } from './Movies.styled';
+import { MovieList } from 'components/MovieList/MovieList';
+import { SearchForm } from '../../components/SearchForm/SearchForm';
 
 const Movies = () => {
-  const [searchParams, setSearchParams] = useSearchParams('');
-  const [movieList, setMovieList] = useState('');
-  const location = useLocation();
+  const [searchParams] = useSearchParams('');
+  const [findedMovies, setFindedMovies] = useState('');
 
   const query = searchParams.get('query');
 
@@ -19,7 +20,7 @@ const Movies = () => {
         const response = await getMovies(query);
 
         if (response) {
-          setMovieList(response.results);
+          setFindedMovies(response.results);
         }
       } catch {
       } finally {
@@ -28,34 +29,11 @@ const Movies = () => {
     searchMovies(query);
   }, [query]);
 
-  const onFormSubmit = e => {
-    e.preventDefault();
-    setSearchParams({ query: e.target[0].value });
-  };
-
   return (
     <main>
       <MovieWrap>
-        <Form onSubmit={onFormSubmit}>
-          <Input type="text" name="query" defaultValue={query} />
-          <Button type="submit">Search</Button>
-        </Form>
-
-        {movieList && (
-          <div>
-            <ul>
-              {movieList.map(movie => {
-                return (
-                  <li key={movie.id}>
-                    <StyledLink to={`${movie.id}`} state={{ from: location }}>
-                      {movie.original_title}
-                    </StyledLink>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        )}
+        <SearchForm />
+        {findedMovies && <MovieList movieList={findedMovies} />}
       </MovieWrap>
     </main>
   );

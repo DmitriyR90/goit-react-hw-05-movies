@@ -1,12 +1,11 @@
-import { Suspense, useEffect } from 'react';
+import { MovieList } from 'components/MovieList/MovieList';
+import { useEffect } from 'react';
 import { useState } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
 import { getTrandings } from '../../API';
-import { TrendsWrap, StyledLink } from './Home.styled';
+import { TrendsWrap } from './Home.styled';
 
 const Home = () => {
   const [trends, setTrends] = useState([]);
-  const location = useLocation();
 
   useEffect(() => {
     async function getTrends() {
@@ -27,26 +26,8 @@ const Home = () => {
     <main>
       <TrendsWrap>
         <h1>Trending Today</h1>
-
-        <ul>
-          {trends.map(item => {
-            return (
-              <li key={item.id}>
-                <StyledLink
-                  to={`/movies/${item.id}`}
-                  state={{ from: location }}
-                >
-                  {item.title}
-                </StyledLink>
-              </li>
-            );
-          })}
-        </ul>
+        <MovieList movieList={trends} />
       </TrendsWrap>
-
-      <Suspense fallback={<div>Loading page...</div>}>
-        <Outlet />
-      </Suspense>
     </main>
   );
 };
